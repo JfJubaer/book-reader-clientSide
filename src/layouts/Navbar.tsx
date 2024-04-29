@@ -46,21 +46,13 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/products">Products</Link>
-                </Button>
-              </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/checkout">Checkout</Link>
+                  <Link to="/products">All Books</Link>
                 </Button>
               </li>
               <li>
                 <Button variant="ghost">
                   <HiOutlineSearch size="25" />
                 </Button>
-              </li>
-              <li>
-                <Cart />
               </li>
               <li className="ml-5">
                 <DropdownMenu>
@@ -71,11 +63,6 @@ export default function Navbar() {
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
-                    <DropdownMenuLabel>Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">
-                      Profile
-                    </DropdownMenuItem>
                     {!user.email && (
                       <>
                         <Link to="/login">
