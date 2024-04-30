@@ -13,6 +13,14 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ['users'],
     }),
+    postlogin: builder.mutation({
+      query: (data) => ({
+        url: '/users/login',
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['users'],
+    }),
     getusers: builder.query({
       query: () => `/users`,
       providesTags: ['users'],
@@ -20,5 +28,9 @@ const userApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetusersQuery, usePostusersMutation, useSingleusersQuery } =
-  userApi;
+export const {
+  useGetusersQuery,
+  usePostusersMutation,
+  useSingleusersQuery,
+  usePostloginMutation,
+} = userApi;
