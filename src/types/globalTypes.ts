@@ -1,10 +1,9 @@
-export interface IProduct {
+export type IBook = {
   _id: number;
-  name: string;
-  image: string;
-  price: number;
-  features: string[];
-  status: boolean;
-  rating: number;
-  quantity?: number;
-}
+  title: string;
+  author: string;
+  genre: string;
+  authorEmail: string;
+  publicationDate: string;
+  reviews: string[];
+};

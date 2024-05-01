@@ -2,41 +2,41 @@ import ProductCard from '@/components/ProductCard';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
-import { useGetProductsQuery } from '@/redux/features/products/productApi';
+import { useGetbooksQuery } from '@/redux/features/books/booksApi';
 import {
   setPriceRange,
   toggleState,
 } from '@/redux/features/products/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { IProduct } from '@/types/globalTypes';
+import { IBook } from '@/types/globalTypes';
 
 export default function Products() {
-  const { data, isLoading, error } = useGetProductsQuery(undefined);
+  const { data  } = useGetbooksQuery(undefined,{ refetchOnMountOrArgChange: true,});
 
-  const { toast } = useToast();
+  console.log(data);
 
-  const { priceRange, status } = useAppSelector((state) => state.product);
+
+  // const { priceRange, status } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
 
   const handleSlider = (value: number[]) => {
     dispatch(setPriceRange(value[0]));
   };
 
-  let productsData;
+  // let productsData;
 
-  if (status) {
-    productsData = data?.data?.filter(
-      (item: { status: boolean; price: number }) =>
-        item.status === true && item.price < priceRange
-    );
-  } else if (priceRange > 0) {
-    productsData = data?.data?.filter(
-      (item: { price: number }) => item.price < priceRange
-    );
-  } else {
-    productsData = data?.data;
-  }
+  // if (status) {
+  //   productsData = data?.data?.filter(
+  //     (item: { status: boolean; price: number }) =>
+  //       item.status === true && item.price < priceRange
+  //   );
+  // } else if (priceRange > 0) {
+  //   productsData = data?.data?.filter(
+  //     (item: { price: number }) => item.price < priceRange
+  //   );
+  // } else {
+  //   productsData = data?.data;
+  // }
 
   return (
     <div className="grid grid-cols-12 max-w-7xl mx-auto relative ">
@@ -62,11 +62,11 @@ export default function Products() {
               onValueChange={(value) => handleSlider(value)}
             />
           </div>
-          <div>From 0$ To {priceRange}$</div>
+          {/* <div>From 0$ To {priceRange}$</div> */}
         </div>
       </div>
       <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
-        {productsData?.map((product: IProduct) => (
+        {data?.data?.map((product: IBook) => (
           <ProductCard product={product} />
         ))}
       </div>
