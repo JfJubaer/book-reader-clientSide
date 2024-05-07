@@ -21,7 +21,6 @@ export default function ProductReview({ id }: IProps) {
   });
   const [postComment, { isLoading, isError, isSuccess }] =
     usePostCommentMutation();
-
   console.log(isLoading);
   console.log(isError);
   console.log(isSuccess);
@@ -29,12 +28,10 @@ export default function ProductReview({ id }: IProps) {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(inputValue);
-
     const options = {
       id: id,
       data: { comment: inputValue },
     };
-
     postComment(options);
     setInputValue('');
   };

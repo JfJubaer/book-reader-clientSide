@@ -8,6 +8,14 @@ const productApi = api.injectEndpoints({
     singleProduct: builder.query({
       query: (id) => `/product/${id}`,
     }),
+    patchProduct: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/books/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['books'],
+    }),
     postComment: builder.mutation({
       query: ({ id, data }) => ({
         url: `/comment/${id}`,
@@ -28,4 +36,5 @@ export const {
   useGetProductsQuery,
   usePostCommentMutation,
   useSingleProductQuery,
+  usePatchProductMutation,
 } = productApi;

@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { loginUser } from '@/redux/features/user/userSlice';
+import {  setUser } from '@/redux/features/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { usePostloginMutation } from '@/redux/features/user/user.api';
@@ -29,7 +29,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<LoginFormInputs>();
 
 
-  const [postlogin, { isLoading, isError, isSuccess ,status}] = usePostloginMutation();
+  const [postlogin, { isLoading, isError, isSuccess ,status,data}] = usePostloginMutation();
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -42,6 +44,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
 
   useEffect(() => {
     if (status==='fulfilled' && !isLoading) {
+dispatch(setUser(data?.data?.email));
+// console.log(data.data.email)
       navigate('/');
     }
   }, [status, isLoading]);
